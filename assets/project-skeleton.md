@@ -5,8 +5,9 @@
 ## 使用方式
 
 ```bash
-# 在对应模块目录下创建 _dev 目录
-mkdir -p <project-root>/<module-path>/_<feature>_dev
+# DEV_DIR 由启动协议步骤 0 确定（询问用户或从上下文推断）
+# 示例：DEV_DIR="src/components/v3/rule-engine/_parallel_node_dev"
+mkdir -p "$DEV_DIR"
 ```
 
 ## 初始化文件
@@ -26,11 +27,9 @@ mkdir -p <project-root>/<module-path>/_<feature>_dev
 ## 2. 功能需求
 
 ### §2.1 [子功能 1]
-
 [描述]
 
 ### §2.2 [子功能 2]
-
 [描述]
 
 ## 3. 交互规范
@@ -51,7 +50,7 @@ mkdir -p <project-root>/<module-path>/_<feature>_dev
 
 1. SPEC.md 是第一准则，方向调整先改 SPEC
 2. 每次迭代必须记录 changelog
-3. 所有 agent 文件归属当前 \_dev 目录
+3. 所有 agent 文件归属当前 _dev 目录
 
 ## MARK 记录
 
@@ -64,12 +63,10 @@ mkdir -p <project-root>/<module-path>/_<feature>_dev
 # 需求实施计划
 
 ## Phase 1: [阶段名] ⏳
-
 - 验收标准: [具体可验证的标准]
 - 涉及模块: [文件/模块列表]
 
 ## Phase 2: [阶段名] ⏳
-
 - 验收标准: [具体可验证的标准]
 - 涉及模块: [文件/模块列表]
 ```
@@ -81,9 +78,9 @@ mkdir -p <project-root>/<module-path>/_<feature>_dev
 
 ## 快速索引
 
-| 编号 | 类型 | 标题     |
-| ---- | ---- | -------- |
-| —    | —    | 暂无记录 |
+| 编号 | 类型 | 标题 |
+|------|------|------|
+| — | — | 暂无记录 |
 
 <!-- 最新 Bug 编号: 0 -->
 <!-- 最新重构编号: 0 -->

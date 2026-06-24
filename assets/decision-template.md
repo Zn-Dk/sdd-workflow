@@ -28,16 +28,13 @@ Architecture Decision Record（ADR）格式，用于记录关键技术决策。
 [为什么选这个方案（≤ 3 点）]
 
 **考虑的替代方案**：
-
 1. [方案 B] — 不选的原因：[简述]
 2. [方案 C] — 不选的原因：[简述]
 
 **影响**：
-
 - [对代码/架构/性能的影响]
 
 **关联**：
-
 - [相关的 Bug/MARK/SPEC 章节，可选]
 ```
 
@@ -46,36 +43,32 @@ Architecture Decision Record（ADR）格式，用于记录关键技术决策。
 ## 示例
 
 ```markdown
-### ADR #1: 状态管理选用 Zustand 而非 Redux
+### ADR #1: 并发节点不使用 autoResize
 
 **日期**：2025-03-15
 **状态**：已采纳
 
 **背景**：
-项目需要全局状态管理方案。Redux 是成熟方案但样板代码多，Zustand 更轻量但生态较小。
+并发节点的分支包围框需要动态计算大小。VueFlow 提供了 autoResize 选项，但在嵌套场景下表现异常。
 
 **决策**：
-选用 Zustand 作为全局状态管理方案。
+手动计算包围框尺寸，不使用 VueFlow 的 autoResize。
 
 **理由**：
-
-1. 项目规模中等，不需要 Redux 的中间件生态
-2. Zustand API 简洁，减少样板代码约 60%
-3. 与 React 18+ 的 concurrent 特性兼容良好
+1. autoResize 在嵌套模板场景下会导致无限循环更新
+2. 手动计算可以精确控制时机，避免不必要的重排
+3. 与 collapsible 功能冲突
 
 **考虑的替代方案**：
-
-1. Redux Toolkit — 不选：对当前项目规模来说过重，样板代码多
-2. Jotai — 不选：原子化模型不适合本项目的集中式状态结构
+1. 使用 autoResize + debounce — 不选：仍有循环风险，且 debounce 导致视觉跳动
+2. 使用 ResizeObserver — 不选：无法控制计算时机，性能开销大
 
 **影响**：
-
-- 所有全局状态统一通过 Zustand store 管理
-- 团队需要熟悉 Zustand 的 selector 模式
+- 需要在 appendTemplateNodes 和 combineCanvas 中手动维护 BBox 计算逻辑
 
 **关联**：
-
-- SPEC §2.1: 状态管理需求
+- Bug 23: autoResize 导致的无限循环
+- MARK #4: 不使用 autoResize
 ```
 
 ---
