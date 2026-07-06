@@ -12,8 +12,12 @@ src/components/v3/rule-engine/_<feature>_dev/
 ├── DECISIONS.md         # 架构决策（可选）
 ├── changelog.md         # 变更日志
 ├── TODO.md              # 待办事项
-└── DESIGN_GUIDE.md      # 设计稿分析（可选）
+├── DESIGN_GUIDE.md      # 设计稿分析（可选）
+├── findings.md          # 研究发现（会话级，可选）
+└── progress.md          # 会话日志（会话级，可选）
 ```
+
+> ⚠️ `findings.md` 和 `progress.md` 是会话级文件（Agent 工作记忆），不是交付物。可在 `.gitignore` 中排除。其使用规范参见 [06_session-persistence.md](06_session-persistence.md)。
 
 ---
 
@@ -230,6 +234,8 @@ src/components/v3/rule-engine/_<feature>_dev/
 | Bug 分析 | → changelog.md |
 | 现有组件适配性分析 | → DECISIONS.md |
 | 代码结构设计 | → SPEC.md 或 DECISIONS.md |
+| 源码阅读笔记 / 调研发现 | → findings.md（会话级，参见 06） |
+| 会话工作轨迹 | → progress.md（会话级，参见 06） |
 
 ---
 
@@ -237,3 +243,5 @@ src/components/v3/rule-engine/_<feature>_dev/
 
 - ❌ 把 `_dev` 文件当作最后统一补写的归档动作，而不是跟随每轮状态变化即时同步
 - ❌ 已经判断出 dirty 文件，却把同步留到下一轮"顺手再补"
+- ❌ 把会话级文件（findings.md / progress.md）当作产出物提交到 git（它们是 Agent 工作记忆，可 .gitignore）
+- ❌ 把产出物内容复制到会话级文件（信息冗余，违反单一数据源原则）

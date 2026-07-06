@@ -35,6 +35,7 @@ references:
 2. 每轮结束前必须执行 `_dev` dirty-state 判定：代码、需求、阶段、约束、待办、决策任一变化，都要映射到对应文件。
 3. 被判定为 dirty 的文件必须在本轮同步，或明确说明无需同步的原因；存在未同步 dirty 产物时，不得以“已完成”“已修复”结束本轮。
 4. 连续多轮对话、切换焦点后回到原需求、或重新进入已有 `_dev/` 目录时，必须执行最小恢复：`SPEC.md`、`CLAUDE.md`、`PLAN.md`、`changelog.md` 最近条目，必要时补读 `TODO.md`。
+5. 中大需求或多轮迭代场景下，使用会话级文件（`findings.md` / `progress.md`）作为 Agent 工作记忆，跨会话恢复时必须先读会话级文件再读 `_dev/` 产出物（参见 `06_session-persistence.md`）。
 
 ## 阶段 → 子 Skill 映射
 
@@ -56,6 +57,7 @@ references:
 | 产出物规范 | [modules/03_artifacts.md](modules/03_artifacts.md)                   | 各文件的写入规则与反模式                 | 判断 `_dev/` 文件怎么写时    |
 | 迭代协议   | [modules/04_iteration-protocol.md](modules/04_iteration-protocol.md) | Bug 修复、回归、决策回溯与实验性代码约束 | 处理 Bug / 回归 / 实验代码时 |
 | MARK 系统  | [modules/05_mark-system.md](modules/05_mark-system.md)               | 约束记录与防遗漏机制                     | 管理项目级约束时             |
+| 会话持久化 | [modules/06_session-persistence.md](modules/06_session-persistence.md) | 会话级工作记忆、行为规则与跨会话恢复     | 中大需求/多轮迭代/跨会话恢复时 |
 
 ## 资源文件
 

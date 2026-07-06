@@ -65,6 +65,23 @@
 
 ---
 
+## 会话持久化检查（中大需求 / 多轮迭代 / 跨会话场景）
+
+> 仅适用于中大需求或多轮迭代场景，小需求可跳过。参见 [06_session-persistence.md](../modules/06_session-persistence.md)。
+
+```markdown
+- [ ] 已创建 findings.md（如有调研/源码阅读阶段）
+- [ ] 已创建 progress.md（如为多轮迭代或跨会话场景）
+- [ ] 每完成 2 次读取/浏览操作后，关键发现已写入 findings.md（2-Action Rule）
+- [ ] 重大决策前已读取 findings.md + DECISIONS.md + SPEC.md（Read Before Decide）
+- [ ] 每轮结束前已更新 progress.md（Write After Act）
+- [ ] 跨会话恢复时已执行 4 步恢复流程（git diff → 会话级文件 → _dev/ 产出物 → 对比修正）
+- [ ] 会话级文件未被当作产出物提交（应 .gitignore 或标注临时性）
+- [ ] 遇到错误时未重复相同的失败动作（3-Strike Protocol）
+```
+
+---
+
 ## 产出物完整性验证
 
 可执行的验证命令（需先设置 `DEV_DIR` 为当前需求的 `_dev/` 目录路径）：

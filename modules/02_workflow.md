@@ -192,14 +192,33 @@ Agent 回顾后，在回复中简要确认：
 - 切换过话题后回到原需求
 - 重新进入已有 `_dev/` 目录继续实施
 - 上一轮已改代码，但未显式确认 `_dev` 已同步
+- 新会话开始或 `/clear` 后重新进入需求
 
-最小恢复集合：
+#### 恢复步骤
 
-- `SPEC.md`
-- `CLAUDE.md`
-- `PLAN.md`
-- `changelog.md` 最近条目
-- 必要时 `TODO.md`
+```
+Step 1: 检查代码变更
+   → git diff --stat（查看自上次以来的代码改动）
+   → git log --oneline -5（查看最近提交）
+
+Step 2: 读取会话级文件（如有，参见 06_session-persistence.md）
+   → progress.md（上次会话做到哪一步）
+   → findings.md（研究阶段发现了什么）
+
+Step 3: 读取 _dev/ 产出物（最小恢复集合）
+   → SPEC.md
+   → CLAUDE.md
+   → PLAN.md
+   → changelog.md 最近条目
+   → 必要时 TODO.md
+
+Step 4: 对比与修正
+   → 代码变更是否已反映在 changelog 中？
+   → 阶段状态是否与 PLAN.md 一致？
+   → 如有偏差，先同步 _dev/ 产出物，再继续工作
+```
+
+> ⚠️ 中大需求或跨会话场景下，会话级文件（`progress.md` / `findings.md`）的创建和使用参见 [06_session-persistence.md](06_session-persistence.md)。小需求可跳过会话级文件，仅执行 Step 1 + Step 3。
 
 ---
 
@@ -225,3 +244,5 @@ Agent 回顾后，在回复中简要确认：
 ❌ 修改共享模块前不回顾 DECISIONS.md
 ❌ 迭代超过 5 轮不刷新约束记忆
 ❌ 本轮有 dirty 产物却跨轮悬空
+❌ 跨会话恢复时只读 `_dev/` 产出物，不读会话级文件（丢失工作轨迹）
+❌ 读了源码/截图/文档后不及时写入 `findings.md`（多模态信息丢失）
