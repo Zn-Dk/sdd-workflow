@@ -6,7 +6,9 @@
 
 ```bash
 # DEV_DIR 由启动协议步骤 0 确定（询问用户或从上下文推断）
-# 示例：DEV_DIR="src/components/v3/rule-engine/_parallel_node_dev"
+# 命名规范：<模块路径>/_dev/<type>_<slug>（type 取 commitlint 类型，slug 用 kebab-case）
+# 同模块多需求共享一个 _dev/ 目录；不强制编号/日期，同 feature 多轮用 -vN 后缀
+# 示例：DEV_DIR="src/components/v3/rule-engine/_dev/feat_parallel-node"
 mkdir -p "$DEV_DIR"
 ```
 

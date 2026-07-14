@@ -2,22 +2,30 @@
 
 ## 目录结构
 
-每个需求开发在对应模块下创建 `_dev/` 目录：
+每个模块下统一建**一个** `_dev/` 目录，模块内的每个需求/迭代/修复各占一个子目录（`_dev/<type>_<slug>`），共享同一命名空间：
 
 ```
-src/components/v3/rule-engine/_<feature>_dev/
-├── SPEC.md              # 需求规格（第一准则）
-├── CLAUDE.md            # MARK 约束记录
-├── PLAN.md              # 阶段规划（≤ 3KB）
-├── DECISIONS.md         # 架构决策（可选）
-├── changelog.md         # 变更日志
-├── TODO.md              # 待办事项
-├── DESIGN_GUIDE.md      # 设计稿分析（可选）
-├── findings.md          # 研究发现（会话级，可选）
-└── progress.md          # 会话日志（会话级，可选）
+src/components/v3/rule-engine/_dev/
+├── feat_parallel-node/       # 新功能 A
+│   ├── SPEC.md               # 需求规格（第一准则）
+│   ├── CLAUDE.md             # MARK 约束记录
+│   ├── PLAN.md               # 阶段规划（≤ 3KB）
+│   ├── DECISIONS.md          # 架构决策（可选）
+│   ├── changelog.md          # 变更日志
+│   ├── TODO.md               # 待办事项
+│   ├── DESIGN_GUIDE.md       # 设计稿分析（可选）
+│   ├── findings.md           # 研究发现（会话级，可选）
+│   └── progress.md           # 会话日志（会话级，可选）
+├── perf_strategy-lazyload/   # 性能优化 B（同模块下一迭代）
+└── fix_export-crash/         # 修复 C
 ```
 
 > ⚠️ `findings.md` 和 `progress.md` 是会话级文件（Agent 工作记忆），不是交付物。可在 `.gitignore` 中排除。其使用规范参见 [06_session-persistence.md](06_session-persistence.md)。
+
+> **命名规范**：`<type>_<slug>`
+> - `type`：复用项目 commitlint 提交类型（`feat` / `fix` / `refactor` / `perf` …），下划线 `_` 作为 type 与 slug 的主分隔。
+> - `slug`：kebab-case、名词化、≤ 3-4 词；因已嵌套在模块 `_dev/` 下，无需再带模块前缀。
+> - 不强制编号 / 日期（git 已提供时间轴，编号在并行分支易冲突）；同一 feature 多轮并存时用 `-vN` 后缀区分。
 
 ---
 
