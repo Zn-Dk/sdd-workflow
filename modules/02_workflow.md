@@ -104,10 +104,11 @@
 
 ### 执行要点
 
-1. 调用 `code-generate` skill 执行代码生成
-2. 每次实施完成后，先判断 `_dev` dirty-state，再同步对应文件；至少追加 changelog.md 条目
-3. 遵循 Karpathy 准则：最小改动、外科手术式修改
-4. 实施过程中发现的问题记录到 TODO.md
+1. 调用用途为 `code-generate` 的 skill 执行代码生成
+2. 以路由阶段确定的实际影响范围为实施边界；未另行声明模块时，以 `SPEC.md` / `PLAN.md` 作为范围输入。阶段 3 不默认执行全仓扫描，生成后自检可交由阶段 4 统一完成
+3. 每次实施完成后，先判断 `_dev` dirty-state，再同步对应文件；至少追加 changelog.md 条目
+4. 遵循 Karpathy 准则：最小改动、外科手术式修改
+5. 实施过程中发现的问题记录到 TODO.md
 
 ---
 
